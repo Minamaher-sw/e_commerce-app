@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="nav d-flex justify-content-around align-items-center">
+      <h1 class="d-inline ">{{storeProperty.name}}</h1>
+      <img class="card-img " style="width: 100px; height: 40px;" [src]="storeProperty.logo">
+  </div>
+<br>
+<h1 class="">TotalOrderPrice : {{totalOrderPrice}}</h1>
+<div class="row">
+  @for (item of productList; track item.productId) {
+  <div class="card col-md-3" style="box-sizing: border-box;" style="height: auto;">
+      @if(item.showImage){
+        <img [src]="item.productImgUrl" class="card-img-top w-50 m-auto" alt="..." >
+      }
+      @else{
+        <div class="text-primary " style="padding: 4em;">Thanks for purchasing from our Store {{clinetName}}</div>
+      }
+      <div class="card-body">
+        <h5 class="card-title">price : {{item.productPrice}}</h5>
+        <h5 class="card-title">Quantity: {{item.productQuantity}}</h5>
+        <p class="card-text">{{item.productDetails}}</p>
+        <button class="btn btn-primary me-2"  (click)="toggle(item)">{{item.showImage ? "Hide" :"show" }}/image</button>
+        <button class="btn btn-primary ps-2" [disabled]="item.productQuantity == 0" (click)="Buy(item)">Buy</button>
+
+        @switch (item.productQuantity) {
+          @case (0) {
+            <p class=" text-danger fw-bold p-2">Out Of Stoke</p>
+          }
+          @case (1) {
+              <p class="text-primary fw-bold p-2">Last One Item</p>
+          }
+          @case (2) {
+            <p class="text-dark fw-bold p-2">Last TWO Item</p>
+          }
+          @default {
+            <p class="text-success fw-bold p-2">In Stoke</p>
+          }
+        }
+      </div>
+  </div>
+}
+</div>
+</div>
+
+
