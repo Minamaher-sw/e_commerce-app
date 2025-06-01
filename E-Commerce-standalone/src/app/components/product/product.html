@@ -7,10 +7,11 @@
 <h1 class="">TotalOrderPrice : {{totalOrderPrice}}</h1>
 <label class="form-label  text-primary" >Go To Specfic component </label>
 <input type="text" class="form-control mb-2" [(ngModel)]="filterName">
+<p>{{filterName}}</p>
 
 <div class="row" >
   @for (item of productListUpdate; track item.productId) {
-  <div class="card col-md-3 m-5" style="box-sizing: border-box;"  [ngClass]="{'bg-danger':item.productQuantity ==  0 , 'bg-light':item.productQuantity> 0}" appProductCard raduisValue="20px">
+  <div class="card col-md-3 m-5" style="box-sizing: border-box;"  [ngClass]="{'bg-danger':item.productQuantity ==  0 , 'bg-light':item.productQuantity> 0}" appProductCard raduisValue="12px">
       @if(item.showImage){
         <img [src]="item.productImgUrl" class="card-img-top w-50 m-auto" alt="..." >
       }

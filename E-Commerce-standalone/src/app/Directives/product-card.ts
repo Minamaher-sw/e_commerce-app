@@ -20,7 +20,6 @@ export class ProductCard implements OnChanges, OnInit{
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
     this.elem.nativeElement.style.borderRadius = this.raduisValue;
-    // this.elem.nativeElement.style.borderRadius = "30px";
   }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
