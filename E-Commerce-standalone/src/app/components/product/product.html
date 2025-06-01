@@ -5,16 +5,21 @@
   </div>
 <br>
 <h1 class="">TotalOrderPrice : {{totalOrderPrice}}</h1>
-<div class="row">
-  @for (item of productList; track item.productId) {
-  <div class="card col-md-3" style="box-sizing: border-box;" style="height: auto;">
+<label class="form-label  text-primary" >Go To Specfic component </label>
+<input type="text" class="form-control mb-2" [(ngModel)]="filterName">
+<p>{{filterName}}</p>
+
+<div class="row" >
+  @for (item of productListUpdate; track item.productId) {
+  <div class="card col-md-3 m-5" style="box-sizing: border-box;"  [ngClass]="{'bg-danger':item.productQuantity ==  0 , 'bg-light':item.productQuantity> 0}" appProductCard raduisValue="12px">
       @if(item.showImage){
         <img [src]="item.productImgUrl" class="card-img-top w-50 m-auto" alt="..." >
       }
       @else{
         <div class="text-primary " style="padding: 4em;">Thanks for purchasing from our Store {{clinetName}}</div>
       }
-      <div class="card-body">
+      <div class="card-body " [ngStyle]="{'background-color': item.productQuantity == 0 ?'yellow':'white',}">
+        <h5 class="card-title" >Name: {{item.productName}}</h5>
         <h5 class="card-title">price : {{item.productPrice}}</h5>
         <h5 class="card-title">Quantity: {{item.productQuantity}}</h5>
         <p class="card-text">{{item.productDetails}}</p>
