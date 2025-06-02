@@ -4,10 +4,9 @@
       <img class="card-img " style="width: 100px; height: 40px;" [src]="storeProperty.logo">
   </div>
 <br>
+<!-- custome pipe -->
+<p>{{creditCard | creditCard}}</p>
 <h1 class="">TotalOrderPrice : {{totalOrderPrice}}</h1>
-<label class="form-label  text-primary" >Go To Specfic component </label>
-<input type="text" class="form-control mb-2" [(ngModel)]="filterName">
-
 <div class="row" >
   @for (item of productListUpdate; track item.productId) {
   <div class="card col-md-3 m-5" style="box-sizing: border-box;"  [ngClass]="{'bg-danger':item.productQuantity ==  0 , 'bg-light':item.productQuantity> 0}" appProductCard raduisValue="20px">
@@ -19,12 +18,13 @@
       }
       <div class="card-body " [ngStyle]="{'background-color': item.productQuantity == 0 ?'yellow':'white',}">
         <h5 class="card-title" >Name: {{item.productName}}</h5>
-        <h5 class="card-title">price : {{item.productPrice}}</h5>
+        <h5 class="card-title">price : {{item.productPrice | currency:"EUR" :"code"}}</h5>
         <h5 class="card-title">Quantity: {{item.productQuantity}}</h5>
+          <h5 class="card-title">Date: {{date | date:"short"}}</h5>
         <p class="card-text">{{item.productDetails}}</p>
         <button class="btn btn-primary me-2"  (click)="toggle(item)">{{item.showImage ? "Hide" :"show" }}/image</button>
         <button class="btn btn-primary ps-2" [disabled]="item.productQuantity == 0" (click)="Buy(item)">Buy</button>
-
+        <button class="btn btn-primary ps-2 ms-1" [disabled]="item.productQuantity == 0" (click)="addToCarInChild(item)">Add Cart</button>
         @switch (item.productQuantity) {
           @case (0) {
             <p class=" text-danger fw-bold p-2">Out Of Stoke</p>

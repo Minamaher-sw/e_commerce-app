@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '../../models/store';
 import { Iproducts } from '../../models/iproducts';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductCard } from '../../Directives/product-card';
+import { CreditCardPipe } from "../../pipe/credit-card-pipe";
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule ,FormsModule,ProductCard],
+  imports: [CommonModule, FormsModule, ProductCard, CreditCardPipe],
   templateUrl: './product.html',
   styleUrl: './product.css'
 })
@@ -17,6 +18,8 @@ export class Product {
   totalOrderPrice:number =0 ;
   productListUpdate:Iproducts[]=[];
   productList:Iproducts[] =[]
+  date:Date=new Date();
+  creditCard:string="1222333344445555";
   storeProperty: Store = new Store("",[],"")
   constructor(){
     this.storeProperty= new Store(
@@ -148,7 +151,7 @@ export class Product {
       }
 
       // part2
-      set filterName(setValue :string){
+@Input() set filterName(setValue :string){
         console.log(setValue)
         this.productListUpdate =this.doSearch(setValue);
         console.log(this.doSearch(setValue))
@@ -159,5 +162,10 @@ export class Product {
       return this.productList.filter((pro: Iproducts) => {
           return pro.productName.toLowerCase().includes(value);
       });
+      }
+
+      @Output() prdProperty:EventEmitter<Iproducts> =new EventEmitter<Iproducts>()
+      addToCarInChild(prd:Iproducts){
+        this.prdProperty.emit(prd);
       }
   }
