@@ -1,0 +1,22 @@
+<div class="container">
+    <label class="form-label  text-primary" >Go To Specfic component </label>
+    <input type="text" class="form-control mb-2" [(ngModel)]="filterName">
+</div>
+<app-product [filterName]="filterName" (prdProperty)="addToCardParent($event)"></app-product>
+
+<table class="table table-striped table-light">
+    <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </thead>
+    <tbody>
+    @for (item of productParentList; track item.productId) {
+                <tr>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.productPrice}}</td>
+                    <td>{{item.productQuantity}}</td>
+                </tr>
+            }
+    </tbody>
+</table>
