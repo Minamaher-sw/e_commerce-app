@@ -4,11 +4,12 @@
 </div>
 <app-product [filterName]="filterName" (prdProperty)="addToCardParent($event)"></app-product>
 
-<table class="table table-striped table-light">
+<table class="table table-striped table-light container">
     <thead>
         <th>Name</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Action</th>
     </thead>
     <tbody>
     @for (item of productParentList; track item.productId) {
@@ -16,6 +17,7 @@
                     <td>{{item.productName}}</td>
                     <td>{{item.productPrice}}</td>
                     <td>{{item.productQuantity}}</td>
+                    <td><button class="btn btn-primary" (click)="delete(item)">Delete</button></td>
                 </tr>
             }
     </tbody>

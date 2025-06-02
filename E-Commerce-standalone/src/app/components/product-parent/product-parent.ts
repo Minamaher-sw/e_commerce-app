@@ -23,4 +23,8 @@ export class ProductParent {
       this.productParentList.push({...prd,productQuantity:1});
     }
   }
+
+  delete(obj:Iproducts){
+    this.productParentList =this.productParentList.filter(inobj => { return inobj.productId !== obj.productId });
+  }
 }
