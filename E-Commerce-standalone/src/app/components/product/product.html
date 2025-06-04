@@ -9,14 +9,14 @@
 <h1 class="">TotalOrderPrice : {{totalOrderPrice}}</h1>
 <div class="row" >
   @for (item of productListUpdate; track item.productId) {
-  <div class="card col-md-3 m-5" style="box-sizing: border-box;"  [ngClass]="{'bg-danger':item.productQuantity ==  0 , 'bg-light':item.productQuantity> 0}" appProductCard raduisValue="20px">
+  <div class="card col-md-3 m-5" style="box-sizing: border-box;"  [ngClass]="{'bg-dark':item.productQuantity ==  0 , 'bg-light':item.productQuantity> 0}" appProductCard raduisValue="20px">
       @if(item.showImage){
         <img [src]="item.productImgUrl" class="card-img-top w-50 m-auto" alt="..." >
       }
       @else{
         <div class="text-primary " style="padding: 4em;">Thanks for purchasing from our Store {{clinetName}}</div>
       }
-      <div class="card-body " [ngStyle]="{'background-color': item.productQuantity == 0 ?'yellow':'white',}">
+      <div class="card-body " [ngStyle]="{'background-color': item.productQuantity == 0 ?'#eeeeee':'white',}">
         <h5 class="card-title" >Name: {{item.productName}}</h5>
         <h5 class="card-title">price : {{item.productPrice | currency:"EUR" :"code"}}</h5>
         <h5 class="card-title">Quantity: {{item.productQuantity}}</h5>
@@ -25,6 +25,7 @@
         <button class="btn btn-primary me-2"  (click)="toggle(item)">{{item.showImage ? "Hide" :"show" }}/image</button>
         <button class="btn btn-primary ps-2" [disabled]="item.productQuantity == 0" (click)="Buy(item)">Buy</button>
         <button class="btn btn-primary ps-2 ms-1" [disabled]="item.productQuantity == 0" (click)="addToCarInChild(item)">Add Cart</button>
+        <button class="btn btn-primary mt-2" [routerLink]="['/product-parent',item.productId]">Show All Details</button>
         @switch (item.productQuantity) {
           @case (0) {
             <p class=" text-danger fw-bold p-2">Out Of Stoke</p>
