@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Navbar } from './components/navbar/navbar';
-import { Product } from './components/product/product';
+import { Navbar } from './components/navbar/navbar';;
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { ProductParent } from "./components/product-parent/product-parent";

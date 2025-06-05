@@ -1,29 +1,55 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Iproducts } from '../../models/iproducts';
 import { ProductStatic } from '../../services/product-static';
 
 @Component({
   selector: 'app-product-details',
-  imports: [],
   templateUrl: './product-details.html',
-  styleUrl: './product-details.css'
+  styleUrls: ['./product-details.css']  // Corrected typo: `styleUrl` ➝ `styleUrls`
 })
-export class ProductDetails {
-  [x: string]: any;
-  currentId:number =0;
-  product:Iproducts|undefined ;
+export class ProductDetails implements OnInit {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
 
-  constructor(private active:ActivatedRoute , private prdServices : ProductStatic){
-    const idParam = this.active.snapshot.paramMap.get("id");
-    this.currentId = idParam !== null ? +idParam : 0;
+  currentId: number = 0;
+  product: Iproducts | undefined;
+  currentIndex!: number;
+  allids: number[] = [];
 
-    let obj = this.prdServices.getProductsId(this.currentId);
-    if(obj){
-      this.product = obj;
+  constructor(
+    private active: ActivatedRoute,
+    private prdServices: ProductStatic,
+    private router: Router
+  ) {
+    // const idParam = this.active.snapshot.paramMap.get('id');
+    // this.currentId = idParam !== null ? +idParam : 0;
+
+  }
+  ngOnInit(): void {
+    this.active.paramMap.subscribe((data)=>{
+      this.currentId =Number(data.get("id"));
+      this.allids = this.prdServices.getAllIds();
+      this.currentIndex = this.allids.indexOf(this.currentId);
+
+      const obj = this.prdServices.getProductsId(this.currentId);
+      if (obj) {
+        this.product = obj;
+      } else {
+        this.router.navigate(['**']);
+      }
+    })
+  }
+  prev(){
+    if (this.currentIndex > 0) {
+
+      this.router.navigate(['/product-parent', this.allids[--this.currentIndex]]);
     }
-    else{
-      this['route'].navigate(["**"])
+  }
+
+  next() {
+    if (this.currentIndex <( this.allids.length - 1)) {
+      this.router.navigate(['/product-parent', this.allids[++this.currentIndex]]);
     }
   }
 }
