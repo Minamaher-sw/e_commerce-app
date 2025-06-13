@@ -25,6 +25,7 @@
         <button class="btn btn-primary me-2"  (click)="toggle(item)">{{item.showImage ? "Hide" :"show" }}/image</button>
         <button class="btn btn-primary ps-2" [disabled]="item.productQuantity == 0" (click)="Buy(item)">Buy</button>
         <button class="btn btn-primary ps-2 ms-1" [disabled]="item.productQuantity == 0" (click)="addToCarInChild(item)">Add Cart</button>
+        <p>{{item.productId}}</p>
         <button class="btn btn-primary mt-2" [routerLink]="['/product-parent',item.productId]">Show All Details</button>
         @switch (item.productQuantity) {
           @case (0) {

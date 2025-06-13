@@ -1,6 +1,6 @@
 <div class="card">
     <div class="d-flex justify-content-center align-items-center">
-      <img [src]="product?.productImgUrl" class="card-img-top w-25" alt="Product">
+      <img src={{product?.productImgUrl}} class="card-img-top w-25" alt="Product">
       <div class="card-body text-capitalize ">
         <h3 class="card-title text-truncate text-wrap">{{product?.productName}}</h3>
         <h4 class="card-title text-truncate text-wrap">{{product?.productDetails}}</h4>
@@ -10,10 +10,9 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-    <i class="fa-solid fa-arrow-left m-2" (click)=" prev()"></i>
-    <i class="fa-solid fa-arrow-right m-2" (click)="next()"></i>
+    <i class="fa-solid fa-arrow-left m-2 btn btn-light" (click)=" prev()"></i>
+    <i class="fa-solid fa-arrow-right m-2 btn btn-light" (click)="next()"></i>
     </div>
-
 
 </div>
 
