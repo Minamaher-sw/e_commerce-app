@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Iproducts } from '../../models/iproducts';
 import { ProductStatic } from '../../services/product-static';
+import { ProductWithApi } from '../../services/product-with-api';
 
 @Component({
   selector: 'app-product-details',
@@ -19,25 +20,40 @@ export class ProductDetails implements OnInit {
 
   constructor(
     private active: ActivatedRoute,
-    private prdServices: ProductStatic,
-    private router: Router
+    private prdServices: ProductWithApi,
+    private router: Router,
+    private cdr:ChangeDetectorRef
   ) {
     // const idParam = this.active.snapshot.paramMap.get('id');
     // this.currentId = idParam !== null ? +idParam : 0;
 
   }
   ngOnInit(): void {
+
+    // this.currentId = Number(this.active.snapshot.paramMap.get("id"));
+
     this.active.paramMap.subscribe((data)=>{
       this.currentId =Number(data.get("id"));
-      this.allids = this.prdServices.getAllIds();
+      this.prdServices.getAllIds().subscribe({
+        next:(data)=>{
+          this.allids = data.map((id)=> Number(id));
+          console.log(this.allids)
+        }
+      });
       this.currentIndex = this.allids.indexOf(this.currentId);
 
-      const obj = this.prdServices.getProductsId(this.currentId);
-      if (obj) {
-        this.product = obj;
-      } else {
-        this.router.navigate(['**']);
-      }
+      this.prdServices.getPrdById(this.currentId).subscribe({
+        next :(data)=>{
+          this.product = data;
+          this.cdr.detectChanges();
+        },
+        complete:()=>{
+
+        },
+        error:()=>{
+
+        }
+      })
     })
   }
   prev(){

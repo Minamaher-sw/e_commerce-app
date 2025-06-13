@@ -15,7 +15,8 @@ export const routes: Routes = [
       { path: "home", component: Home, title: "Home Page" },
       { path: "aboutus", component: Aboutus, title: "Home Page" },
       { path: "products", component: ProductParent, title: "Home Page" },
-      {path:"product-parent/:id",component:ProductDetails}
+      {path:"product-parent/:id",component:ProductDetails},
+
     ]
   },
   { path: "**", component: Notfound, title: "not found" }
