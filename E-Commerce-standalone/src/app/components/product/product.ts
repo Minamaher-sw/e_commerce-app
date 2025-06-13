@@ -65,9 +65,13 @@ export class Product implements OnInit{
       // part2
 @Input() set filterName(setValue :string){
         console.log(setValue)
-        this.productListUpdate =this.productService.doSearch(setValue);
+      this.productApiService.doSearch(setValue).subscribe({
+        next :(data)=>{
+          this.productListUpdate =data;
+          this.cdr.detectChanges();
+        }
+        });
       }
-
 
       @Output() prdProperty:EventEmitter<Iproducts> =new EventEmitter<Iproducts>()
       addToCarInChild(prd:Iproducts){
