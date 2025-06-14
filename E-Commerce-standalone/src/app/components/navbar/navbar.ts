@@ -13,12 +13,17 @@ export class Navbar {
   userLoggedInNav :boolean =false;
   userAuth=inject(UserAuth)
   constructor(){
-    // using subjct 
+    // using subjct
   this.userAuth.userLoggedMethod().subscribe({
       next:(data)=>{
         this.userLoggedInNav =data;
       }
     });
   }
-
+  login(){
+    this.userAuth.login("mina","123333");
+  }
+  logout(){
+    this.userAuth.logout();
+  }
 }
