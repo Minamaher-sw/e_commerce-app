@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { UserAuth } from '../../services/user-auth';
 
 @Component({
   selector: 'app-navbar',
@@ -8,5 +9,11 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './navbar.css'
 })
 export class Navbar {
+
+  userLoggedInNav :boolean =false;
+  userAuth=inject(UserAuth)
+  constructor(){
+    this.userLoggedInNav = this.userAuth.isUserLogged
+  }
 
 }
