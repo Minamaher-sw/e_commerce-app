@@ -1,0 +1,205 @@
+
+<div class="signup-container">
+  <h2>Sign Up</h2>
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            class="form-control"
+            minlength="2"
+            maxlength="20"
+            pattern="[A-Za-z]+"
+            title="First name should only contain letters"
+            [(ngModel)]="userProp.firstname"
+            #fname="ngModel"
+          [ngClass]="{
+          'is-invalid': (fname.touched || fname.dirty) && fname.invalid,
+          'is-valid': fname.valid && (fname.touched || fname.dirty)
+        }"
+        />
+        <div class="invalid-feedback">
+            @if(fname.errors?.['required']) {
+                <span>First name is required.</span>
+            }
+            @else if(fname.errors?.['minlength']) {
+                <span>First name must be at least 2 characters long.</span>
+            }
+            @else if(fname.errors?.['maxlength']) {
+              <span>First name cannot be more than 20 characters long.</span>
+            }
+            @else if(fname.errors?.['pattern']) {
+              <span>First name should only contain letters.</span>
+            }
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        required
+        minlength="2"
+        maxlength="20"
+        pattern="[A-Za-z]+"
+        title="Last name should only contain letters"
+        class="form-control"
+        [(ngModel)]="userProp.lastname"
+          #lname="ngModel"
+          [ngClass]="{
+          'is-invalid': (lname.touched || lname.dirty) && lname.invalid,
+          'is-valid': lname.valid && (lname.touched || lname.dirty)
+        }"
+        />
+        <div>
+        @if(lname.errors?.['required']) {
+          <span>Last name is required.</span>
+        }
+        @else if(lname.errors?.['minlength']) {
+          <span>Last name must be at least 2 characters long.</span>
+        }
+        @else if(lname.errors?.['maxlength']) {
+          <span>Last name cannot be more than 20 characters long.</span>
+        }
+        @else if(lname.errors?.['pattern']) {
+          <span>Last name should only contain letters.</span>
+        }
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+      type="text"
+      id="username"
+      name="username"
+      required
+      minlength="3"
+      maxlength="15"
+      class="form-control"
+      pattern="[A-Za-z0-9]+"
+      title="Username should be alphanumeric"
+      [(ngModel)]="userProp.username"
+      #uname="ngModel"
+      [ngClass]="{
+          'is-invalid': (uname.touched || uname.dirty) && uname.invalid,
+          'is-valid': uname.valid && (uname.touched || uname.dirty)
+        }"
+        />
+        <div class="invalid-feedback">
+          @if(uname.errors?.['required']) {
+            <span>Username is required.</span>
+          }
+          @else if(uname.errors?.['minlength']) {
+            <span>Username must be at least 3 characters long.</span>
+          }
+          @else if(uname.errors?.['maxlength']) {
+            <span>Username cannot be more than 15 characters long.</span>
+          }
+          @else if(uname.errors?.['pattern']) {
+            <span>Username should only contain letters and numbers.</span>
+          }
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email"
+      id="email"
+      name="email"
+      required
+      title="Please enter a valid email address"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+      [(ngModel)]="userProp.email"
+      class="form-control"
+      [(ngModel)]="userProp.email"
+      #email="ngModel"
+      [ngClass]="{
+      'is-invalid': (email.touched || email.dirty) && email.invalid,
+      'is-valid': email.valid && (email.touched || email.dirty)
+      }"
+      />
+      <div class="invalid-feedback">
+        @if(email.errors?.['required']) {
+          <span>Email is required.</span>
+        }
+        @else if(email.errors?.['email']) {
+          <span>Please enter a valid email address.</span>
+        }
+        @else if(email.errors?.['pattern']) {
+          <span>Email format is invalid.</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required
+      minlength="4" maxlength="20" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+      title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+      [(ngModel)]="userProp.password"
+      class="form-control"
+      #password="ngModel"
+      [ngClass]="{
+        'is-invalid': (password.touched || password.dirty) && password.invalid,
+        'is-valid': password.valid && (password.touched || password.dirty)
+      }"
+      />
+      <div class="invalid-feedback">
+        @if(password.errors?.['required']) {
+          <span>Password is required.</span>
+        }
+        @else if(password.errors?.['minlength']) {
+          <span>Password must be at least 8 characters long.</span>
+        }
+        @else if(password.errors?.['maxlength']) {
+          <span>Password cannot be more than 20 characters long.</span>
+        }
+        @else if(password.errors?.['pattern']) {
+          <span>
+            Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required
+      minlength="4" maxlength="20" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+      [(ngModel)]="userProp.confirmpassword"
+      class="form-control"
+      #confirmpassword="ngModel"
+      [ngClass]="{
+        'is-invalid': (confirmpassword.touched || confirmpassword.dirty) && confirmpassword.invalid,
+        'is-valid': confirmpassword.valid && (confirmpassword.touched || confirmpassword.dirty)
+      }"
+      />
+      <div class="invalid-feedback">
+        @if(confirmpassword.errors?.['required']) {
+          <span>Confirm password is required.</span>
+        }
+        @else if(confirmpassword.errors?.['minlength']) {
+          <span>Confirm password must be at least 8 characters long.</span>
+        }
+        @else if(confirmpassword.errors?.['maxlength']) {
+          <span>Confirm password cannot be more than 20 characters long.</span>
+        }
+        @else if(confirmpassword.errors?.['pattern']) {
+          <span>
+            Confirm password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+          </span>
+        }
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="!signupForm.valid">Create Account</button>
+  </form>
+</div>
