@@ -15,15 +15,14 @@ export class Home {
   userAuth = inject(UserAuth);
 
   constructor(){
-    this.isUserLoggedProp = this.userAuth.isUserLogged
+    this.userAuth.userLoggedMethod().subscribe(data=>{
+      this.isUserLoggedProp = data ;
+    })
   }
   login(){
     this.userAuth.login("mina","123333");
-    this.isUserLoggedProp = this.userAuth.isUserLogged
   }
   logout(){
     this.userAuth.logout()
-    this.isUserLoggedProp = this.userAuth.isUserLogged
   }
-
 }
