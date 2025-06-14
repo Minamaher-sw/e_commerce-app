@@ -13,7 +13,12 @@ export class Navbar {
   userLoggedInNav :boolean =false;
   userAuth=inject(UserAuth)
   constructor(){
-    this.userLoggedInNav = this.userAuth.isUserLogged
+    // using subjct 
+  this.userAuth.userLoggedMethod().subscribe({
+      next:(data)=>{
+        this.userLoggedInNav =data;
+      }
+    });
   }
 
 }
