@@ -152,6 +152,15 @@
       "email": "menamosadef@gamil.com",
       "confirmpassword": "mina@123qwA",
       "id": 7
+    },
+    {
+      "username": "mina202",
+      "password": "Aa1@abcqw",
+      "firstname": "mina",
+      "lastname": "maher",
+      "email": "menamosadef5@gamil.com",
+      "confirmpassword": "mena@123A",
+      "id": 8
     }
   ]
 }
