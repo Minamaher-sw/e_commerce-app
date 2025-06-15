@@ -1,3 +1,5 @@
 
   <app-header></app-header>
+  <button (click)="login()" class="btn btn-primary m-2" [disabled]="isUserLoggedProp">Login</button>
+  <button (click)="logout()" class="btn btn-primary m-2" [disabled]="!isUserLoggedProp">Log Out</button>
   <app-product-parent></app-product-parent>

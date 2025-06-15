@@ -1,15 +1,30 @@
-import { Component } from '@angular/core';
-import { Navbar } from "../navbar/navbar";
+import { Component, inject } from '@angular/core';
 import { Header } from "../header/header";
 import { ProductParent } from "../product-parent/product-parent";
-import { Footer } from "../footer/footer";
+import { UserAuth } from '../../services/user-auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [Navbar, Header, ProductParent, Footer],
+  imports: [Header, ProductParent,],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home {
 
+  isUserLoggedProp:boolean =false;
+  userAuth = inject(UserAuth);
+  router =inject(Router)
+  constructor(){
+    this.userAuth.userLoggedMethod().subscribe(data=>{
+      this.isUserLoggedProp = data ;
+    })
+  }
+  login(){
+    this.router.navigate(["/login"])
+  }
+  logout(){
+    this.userAuth.logout()
+    this.router.navigate(["/login"])
+  }
 }

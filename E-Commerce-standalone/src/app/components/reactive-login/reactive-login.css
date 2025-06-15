@@ -1,0 +1,18 @@
+.login-card {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 2rem;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.field-invalid {
+ color: red !important;
+}
+
+.field-valid {
+   color: green !important;
+}
