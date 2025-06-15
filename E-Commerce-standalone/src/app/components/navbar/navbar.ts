@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { UserAuth } from '../../services/user-auth';
 
 @Component({
@@ -12,6 +12,7 @@ export class Navbar {
 
   userLoggedInNav :boolean =false;
   userAuth=inject(UserAuth)
+  router =inject(Router)
   constructor(){
     // using subjct
   this.userAuth.userLoggedMethod().subscribe({
@@ -21,9 +22,10 @@ export class Navbar {
     });
   }
   login(){
-    this.userAuth.login("mina","123333");
+    this.router.navigate(["/login"])
   }
   logout(){
     this.userAuth.logout();
+    this.router.navigate(["/login"])
   }
 }
